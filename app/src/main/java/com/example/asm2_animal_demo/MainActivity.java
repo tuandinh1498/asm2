@@ -16,19 +16,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.content_frame,new HomeFragment());
         fragmentTransaction.commit();
     }
-    public void gotoDetailFragment(User user) {
-
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        DetailFragment detailFragment=new DetailFragment();
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("object_user",user);
-        detailFragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.content_frame,detailFragment);
-        fragmentTransaction.addToBackStack(DetailFragment.TAG);
-        fragmentTransaction.commit();
-
-    }
-
-
-
 }

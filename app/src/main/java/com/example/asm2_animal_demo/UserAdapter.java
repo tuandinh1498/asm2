@@ -39,8 +39,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
-          User user=listuser.get(position);
-        if(user==null){
+        User user = listuser.get(position);
+        if(user == null){
             return;
         }
 
@@ -69,8 +69,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-
-
          private TextView texthome;
          private ImageView imagehome,imgfavorhome;
         public UserViewHolder(@NonNull View itemView) {
