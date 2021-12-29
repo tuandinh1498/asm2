@@ -11,7 +11,7 @@ public class User implements Serializable, Parcelable {
     private int Img2;
     private String text2;
     private String mota;
-
+    //TEST commit
 
     protected User(Parcel in) {
         Img1 = in.readInt();
