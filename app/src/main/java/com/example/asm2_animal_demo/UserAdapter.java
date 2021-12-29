@@ -10,14 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>{
     private List<User> listuser;
     private Iclicklistener mIclicklistener;
     private Context mContext;
+    private User user;
+
+
+
     public interface Iclicklistener{
-             void Onclicklistener(User user);
+             void Onclicklistener(User user,int position);
          }
     public UserAdapter(List<User> listuser,Iclicklistener listener) {
         this.listuser = listuser;
@@ -55,7 +60,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
           holder.imagehome.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                mIclicklistener.Onclicklistener(user);
+                mIclicklistener.Onclicklistener(user,position);
               }
           });
     }
