@@ -21,6 +21,7 @@ public class DetailFragment extends Fragment {
 
     private String topicName;
     private ArrayList<User> user;
+
     private int position;
     private static final String USER_DATA = "USER_DATA";
     private static final String DEFAULT_POSITION = "DEFAULT_POSITION";
@@ -49,13 +50,30 @@ public class DetailFragment extends Fragment {
           Log.e("data received", position + " : " + user.size());
         }
     }
+    public void gotoHomefragment(User user, int position) {
+        if(getFragmentManager()!=null) {
+            HomeFragment homeFragment=new HomeFragment();
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("ob_user_updated", user);
+            homeFragment.setArguments(bundle);
+            getFragmentManager().popBackStack();
+        }
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.m003_frg_detail_story, container, false);
-        /*ViewPager vp = rootView.findViewById(R.id.vp_story);
-        DetailStoryAdapter adapter = new DetailStoryAdapter(user, mContext);
-        vp.setAdapter(adapter);*/
+        ViewPager vp = rootView.findViewById(R.id.vp_story);
+        DetailStoryAdapter adapter = new DetailStoryAdapter(user, mContext, new DetailStoryAdapter.Iclicklistenerback() {
+            @Override
+            public void Onclicklistenerback(User itemuser, int position) {
+                gotoHomefragment(user.get(position),position);
+            }
+        });
+         vp.setAdapter(adapter);
+         vp.setCurrentItem(position);
         return rootView;
     }
 
@@ -65,13 +83,9 @@ public class DetailFragment extends Fragment {
         mContext = context;
     }
 
-
-
-
-
-
-
-
+    public void setData(ArrayList<User> user) {
+        this.user=user;
+    }
 
 
     //  textdetail = mView.findViewById(R.id.tv_detail);
