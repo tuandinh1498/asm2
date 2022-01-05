@@ -24,7 +24,7 @@ public class MyPhoneStateListener extends PhoneStateListener {
             SharedPreferences preferences= context.getSharedPreferences("FILE_SAVED",Context.MODE_PRIVATE);
             img= preferences.getInt(phoneNumber,0);
             if(img!=0) {
-                Toast toast=new Toast(context);
+                Toast toast=new MyToast(context, img);
                 toast.show();
 
             }

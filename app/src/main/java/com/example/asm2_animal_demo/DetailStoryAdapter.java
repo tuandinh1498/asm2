@@ -52,6 +52,8 @@ public class DetailStoryAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_detail, container, false);
         User object=user.get(position);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("FILE_SAVED", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
         ImageView imgdt = view.findViewById(R.id.img_detail);
@@ -72,6 +74,9 @@ public class DetailStoryAdapter extends PagerAdapter {
         tvdt.setText(object.getText2());
         boolean isLike = object.getLiked();
         checkIsFavored(isLike, imgfavor);
+
+        String sdtCached = sharedPreferences.getString(object.getText2(), "");
+        text_sdt.setText(sdtCached);
 
         imgfavor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,23 +116,15 @@ public class DetailStoryAdapter extends PagerAdapter {
                 bt_save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String textsdt=editText.getText().toString().trim();
+                        String textsdt = editText.getText().toString().trim();
 
                         //Shared prefenrences luu data sdt
-                    SharedPreferences sharedPreferences=mContext.getSharedPreferences("FILE_SAVED",Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putInt(textsdt,object.getImg1());
-                    editor.putString("abc",textsdt);
-                    editor.apply();
-                        SharedPreferences Preferences=mContext.getSharedPreferences("FILE_SAVED",Context.MODE_PRIVATE);
-                        String sdt=Preferences.getString("abc",null);
+                        editor.putInt(textsdt, object.getImg1());
+                        editor.putString(object.getText2(), textsdt);
+                        editor.apply();
                         myDialog.dismiss();
-                        text_sdt.setText(sdt);
-
-
+                        text_sdt.setText(textsdt);
                     }
-
-
                 });
                 bt_delete.setOnClickListener(new View.OnClickListener() {
                     @Override
